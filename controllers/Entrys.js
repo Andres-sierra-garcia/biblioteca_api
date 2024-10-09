@@ -3,8 +3,8 @@ const Entrys = require("../models/Entrys")
 
 const postEntry = async (req, res)=>{
     try {
-        const {laptop, entrytime, checkout, type} = req.body;
-        const entry = new Entrys({laptop, entrytime, checkout, type});
+        const {laptop, holder, entrytime, checkout, type} = req.body;
+        const entry = new Entrys({laptop, holder, entrytime, checkout, type});
         await entry.save()
         res.json({entry})
     } catch (error) {
@@ -18,7 +18,7 @@ const postEntry = async (req, res)=>{
 const getlistarPorHolder = async (req,res)=>{
     try {
         const {id} = req.params;
-        const entry = await Entrys.find({laptop:id});
+        const entry = await Entrys.find({holder:id});
         res.json({entry});
     } catch (error) {
         res.status(400).json({error:"la operacion ha fallado"})

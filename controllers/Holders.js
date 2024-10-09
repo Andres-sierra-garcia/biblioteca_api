@@ -18,7 +18,7 @@ const postHolders = async (req, res) => {
         await holder.save();
         res.json({ holder });
     } catch (error) {
-        res.status(400).json({ error: "operacion no se realizo correctamente" });
+        res.status(400).json({ error: "operacion fallo" });
         console.log(error);
     }
 };

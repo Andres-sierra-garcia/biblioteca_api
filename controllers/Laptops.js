@@ -77,9 +77,9 @@ const putDesactivar = async (req, res)=>{
 
 const generarQr= async (req, res)=> {
     try {
-        const {serial} = req.params;
-        const QRCodigo = await qrCodigo.toDataURL(serial);
-        const laptop = await Laptops.findOneAndUpdate({serial},{qrcode:QRCodigo},{ new:true})
+        const {Serial} = req.params;
+        const QRCodigo = await qrCodigo.toDataURL(Serial);
+        const laptop = await Laptops.findOneAndUpdate({serial:Serial},{qrcode:QRCodigo},{ new:true})
         res.json({laptop})
     } catch (error) {
          res.status(400).json({error:"operacion fallo"})
