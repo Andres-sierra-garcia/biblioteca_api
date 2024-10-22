@@ -2,21 +2,21 @@ const Holder = require('../models/Holders');
 
 const helperHolder={
     validarEmail:async (email)=>{
-        const existe=await Holder.find({email})
+        const existe=await Holder.findOne({email})
         if(existe){
-            throw new Error ("el email ya existe")
+            throw new Error ("el email ya existe" + email)
         }
     },
 
     validarDocument:async (document)=>{
-        const existe=await Holder.find({document})
+        const existe=await Holder.findOne({document})
         if(existe){
             throw new Error ("el documento ya existe")
         }
     },
 
     validarFicha:async (ficha)=>{
-        const existe=await Holder.find({ficha})
+        const existe=await Holder.findOne({ficha})
         if(existe){
             throw new Error ("la ficha ya existe")
         }
@@ -24,7 +24,7 @@ const helperHolder={
 
     validarContraseña:async (password)=>{
 
-        const existe=await Holder.find({password})
+        const existe=await Holder.findOne({password})
         if(existe){
             throw new Error ("la contraseña ya existe")
         }

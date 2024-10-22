@@ -3,6 +3,7 @@ const {postEntry, getlistarPorHolder, getListarPorDia, getListarPorFechas, putEn
 const {helperEntry} = require ('../helpers/Entrys')
 const {validarCampos} = require('../middlewares/validarCampos');
 const { check } = require('express-validator');
+const { validarJWT } = require("../middlewares/validar_jwt");
 const router = Router()
 
 
@@ -18,6 +19,7 @@ router.post("/",[
 
 //listar por holder
 router.get("/holder/:id",[
+    validarJWT,
     check("id","El id no es valido").isMongoId(),
     check("id","El id no existe").custom(helperEntry.validarIdHolder),
     validarCampos
@@ -25,6 +27,7 @@ router.get("/holder/:id",[
 
 //listar por dia
 router.get("/:dia",[
+    validarJWT,
     check("dia","La fecha no es valida").isDate(),
     check("dia","La fecha no existe").custom(helperEntry.validarDia),
     validarCampos
@@ -32,6 +35,7 @@ router.get("/:dia",[
 
 //listar por fechas
 router.get("/fechas/:fechaInicio/:fechaFinal",[
+    validarJWT,
     check("fechaInicio","La fecha no es valida").isDate(),
     check("fechaFinal","La fecha no es valida").isDate(),
     check("fechaInicio","La fecha no existe").custom(helperEntry.validarFechas),
@@ -41,6 +45,7 @@ router.get("/fechas/:fechaInicio/:fechaFinal",[
 
 //entrada o salida
 router.put("/:salida?",[
+    validarJWT,
     check("salida","debe ingresar 1 si es entrada o 0 si es salida").notEmpty(),
     check("id","El id no es valido").isMongoId(),
     check("id","El id no existe").custom(helperEntry.putValidarIdHolder),
